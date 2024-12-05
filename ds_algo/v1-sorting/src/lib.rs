@@ -1,36 +1,36 @@
 use std::fmt::Debug; //used for printing the array or type
 
-pub fn bubble_sort<T:PartialOrd + Debug>(v:&mut [T]){
-    for p in 0..v.len(){
-        let mut sorted =true;
-        for i in 0..(v.len()-1)-p{
-            if v[i]>v[i+1]{
-                v.swap(i,i+1);
-                sorted=false;
-            }
-        }
-        println!("{:?}",v); //we give question mark to print the debug method
-        if sorted{
-            return;
-        }
-    }
-}
+// pub fn bubble_sort<T:PartialOrd + Debug>(v:&mut [T]){
+//     for p in 0..v.len(){
+//         let mut sorted =true;
+//         for i in 0..(v.len()-1)-p{
+//             if v[i]>v[i+1]{
+//                 v.swap(i,i+1);
+//                 sorted=false;
+//             }
+//         }
+//         println!("{:?}",v); //we give question mark to print the debug method
+//         if sorted{
+//             return;
+//         }
+//     }
+// }
 
-//lets do a bonus challenge to improve complexity 
-pub fn bubble_sort_comp<T: PartialOrd + Debug>(v: &mut [T]) {
-    let mut n = v.len();
-    while n > 0 {
-        let mut new_n = 0;
-        for i in 1..n {
-            if v[i - 1] > v[i] {
-                v.swap(i - 1, i);
-                new_n = i;
-            }
-        }
-        println!("{:?}", v); // Print the array after each pass
-        n = new_n; // Limit the next pass to the unsorted portion
-    }
-}
+// //lets do a bonus challenge to improve complexity 
+// pub fn bubble_sort_comp<T: PartialOrd + Debug>(v: &mut [T]) {
+//     let mut n = v.len();
+//     while n > 0 {
+//         let mut new_n = 0;
+//         for i in 1..n {
+//             if v[i - 1] > v[i] {
+//                 v.swap(i - 1, i);
+//                 new_n = i;
+//             }
+//         }
+//         println!("{:?}", v); // Print the array after each pass
+//         n = new_n; // Limit the next pass to the unsorted portion
+//     }
+// }
 
 pub fn merge_sort<T:PartialOrd+Debug>(mut v:Vec<T>)->Vec<T>{
     //sort the left half
@@ -44,7 +44,28 @@ pub fn merge_sort<T:PartialOrd+Debug>(mut v:Vec<T>)->Vec<T>{
     b=merge_sort(b);
     let a_it=a.into_iter();
     let b_it=b.into_iter();
+    let a_peak=a_it.next();
+    let b_peak=b_it.next();
 
+}
+
+pub fn bub_sort<X:PartialOrd+Debug+Clone>(v:&mut [X]){
+    for p in 0..v.len(){
+        
+        let mut sorted=true;
+        for i in 0..v.len()-1{
+            if v[i]> v[i+1]{
+                v.swap(i+1, i);
+                sorted=false;
+                println!("{:?}",v);
+                
+            }
+        }
+        // println!("print karo be {:?}",v);
+        if sorted{
+            return;
+        }
+    }
 
 }
 
@@ -55,7 +76,7 @@ mod tests {
     #[test]
     fn test_buble_sort() {
         let mut v=vec![4,6,1,8,11,13,3];
-        bubble_sort_comp(&mut v);   
-        assert_eq!(v, vec![4,6,8,11,13]);
+        bub_sort(&mut v);   
+        assert_eq!(v, vec![1,3,4,6,8,11,13]); //panic if two values are not equal
     }
 }
