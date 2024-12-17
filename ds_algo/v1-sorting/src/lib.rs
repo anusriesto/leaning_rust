@@ -1,6 +1,11 @@
-use std::fmt::Debug; //used for printing the array or type
+use std::fmt::Debug;
+mod rand;
+//used for printing the array or type
+
 
 pub fn pivot<T:PartialOrd+Debug>(v:&mut [T])->usize{
+    let mut p=rand::rand(v.len());
+    v.swap(p,0);
     let mut p=0;
     for i in 1..v.len(){
         if v[i]<v[p]{
@@ -74,8 +79,6 @@ pub fn quick_sort<T:PartialOrd+Debug>(v:&mut [T]){
     let (a,b)=v.split_at_mut(p);
     quick_sort(a);
     quick_sort(&mut b[1..]);
-    //
-    // 
 }
 
 pub fn bub_sort<X:PartialOrd+Debug+Clone>(v:&mut [X]){
@@ -90,10 +93,16 @@ pub fn bub_sort<X:PartialOrd+Debug+Clone>(v:&mut [X]){
                 
             }
         }
-        // println!("print karo be {:?}",v);
         if sorted{
             return;
         }
+    }
+
+}
+
+pub fn thread_quick_sort<T:PartialOrd+Debug>(v:&mut [T])->{
+    if v.len()<=1{
+        return ;
     }
 
 }
@@ -121,6 +130,7 @@ mod tests {
     fn test_quick_sort(){
         let mut v=vec![3,10,6,2,18,1];
         quick_sort(&mut v);
-        assert_eq!(v,vec![1,2,3,6,10,1]);
+        assert_eq!(v,vec![1,2,3,6,10,18]);
+        panic!()
     }
 }
