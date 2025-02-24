@@ -13,11 +13,11 @@ pub trait Edit {
         },
         None=>  println!("item: {} was not found",title),
 
-    }}
+    }
 
         println!("{} is being set to done", title);
     }
     fn set_to_pending(&self, title: &str) {
         println!("{} is being set to pending", title);
     }
- }
+}
